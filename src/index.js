@@ -1,17 +1,32 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { CookiesProvider } from 'react-cookie';
+import { render } from 'react-dom';
+import { rootPersistor, rootStore } from './redux/rootStore';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <React.Fragment>
+    <CookiesProvider>
+      <App history={history} persistor={rootPersistor} store={rootStore} />
+    </CookiesProvider>
+  </React.Fragment>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+moduleHotAccept(module);
+
+export function moduleHotAccept(mod) {
+  if (mod.hot) {
+    mod.hot.accept('./App', () => {
+      render(
+        <App history={history} store={rootStore} />,
+        document.getElementById('app')
+      );
+    });
+  }
+}

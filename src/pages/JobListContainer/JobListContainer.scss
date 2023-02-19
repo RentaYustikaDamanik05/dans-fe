@@ -1,0 +1,22 @@
+.job-list-container {
+  .align-bottom {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .ant-divider,
+  h1,
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+  .job-title {
+    color: #186d9a;
+  }
+  .job-status {
+    color: #56c171;
+  }
+  .width-100 {
+    width: 100%;
+  }
+}
